@@ -6,7 +6,8 @@ const app = express()
 require('dotenv/config')
 
 //import routes
-const postRoute = require('./routes/board')
+const boardRoute = require('./routes/board')
+const trainerRoute=require('./routes/trainers')
 
 //use cors to allow access of data from the front-end
 app.use(cors({
@@ -14,7 +15,8 @@ app.use(cors({
 }))
 
 app.use(express.json());
-app.use('/api_v_1/board', postRoute)
+app.use('/api_v_1/board', boardRoute)
+app.use('/api_v_1/trainers',trainerRoute)
 //connect to db
 mongoose.connect(
     process.env.DB_CONNECTION,
