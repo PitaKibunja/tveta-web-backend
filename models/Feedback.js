@@ -3,7 +3,7 @@ const FeedbackSchema = new mongoose.Schema({
     feedbacktype: {
         type: String,
         default:'General Feedback',
-        required:true
+        required:false
     },
     name: {
         type: String,
