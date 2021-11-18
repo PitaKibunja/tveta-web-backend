@@ -27,10 +27,6 @@ router.post('/',async(req, res) => {
     } catch (err) {
         res.json({message:err})
     }
-
-    
-
-    
 })
 //get single institution data
 router.get('/:id', async(req, res) => {
