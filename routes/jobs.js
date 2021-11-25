@@ -6,7 +6,7 @@ const Jobs = require('../models/jobs')
 router.get('/', async (req, res) => {
     try {
         const jobs = await Jobs.find()
-        res.json(courses)
+        res.json(jobs)
     } catch (err) {
         res.json({message:err})
     }

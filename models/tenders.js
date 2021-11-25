@@ -14,7 +14,8 @@ const TendersSchema = mongoose.Schema({
     },
     tlink: {
         type: String,
-        required:true
+        required: false,
+        default:'Not provided yet!'
     },
     createdAt: {
         type: Date,

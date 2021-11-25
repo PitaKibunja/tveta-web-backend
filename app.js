@@ -11,7 +11,9 @@ const trainerRoute=require('./routes/trainers')
 const institutionRoute=require('./routes/institutions')
 const courseRoute = require('./routes/courses')
 const navRoute=require('./routes/navigation')
-const feedbackRoute=require('./routes/Feedback')
+const feedbackRoute = require('./routes/Feedback')
+const tendersRoute = require('./routes/tenders')
+const jobsRoute=require('./routes/jobs')
 //use cors to allow access of data from the front-end
 app.use(cors({
     origin:'*'
@@ -23,7 +25,9 @@ app.use('/api_v_1/trainers',trainerRoute)
 app.use('/api_v_1/institution',institutionRoute)
 app.use('/api_v_1/navs',navRoute)
 app.use('/api_v_1/courses', courseRoute)
-app.use('/api_v_1/feedback',feedbackRoute)
+app.use('/api_v_1/feedback', feedbackRoute)
+app.use('/api_v_1/tenders', tendersRoute)
+app.use('/api_v_1/jobs',jobsRoute)
 //connect to db
 mongoose.connect(
     process.env.DB_CONNECTION,

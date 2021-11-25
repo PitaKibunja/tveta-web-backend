@@ -12,9 +12,14 @@ const JobsSchema = new mongoose.Schema({
         type: Date,
         required:true
     },
-    jlinl: {
+    jlink: {
         type: String,
-        required:true
+        required: false,
+        default:'Test Job'
+    },
+    jdescription: {
+        type: String,
+        required: true,
     },
     createdAt: {
         type: Date,
