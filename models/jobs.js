@@ -9,7 +9,7 @@ const JobsSchema = new mongoose.Schema({
         required:true
     },
     jclose: {
-        type: Date,
+        type: String,
         required:true
     },
     jlink: {
@@ -19,7 +19,7 @@ const JobsSchema = new mongoose.Schema({
     },
     jdescription: {
         type: String,
-        required: true,
+        required: true
     },
     createdAt: {
         type: Date,

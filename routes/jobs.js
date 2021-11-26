@@ -18,7 +18,8 @@ router.post('/', async (req, res) => {
         jref: req.body.ref,
         jname: req.body.name,
         jclose: req.body.jclose,
-        jlink: link //make sure the link is obtained before save
+        jdescription:req.body.desc
+        // jlink: link //make sure the link is obtained before save
     })
     try {
         const newJob = await job.save()
@@ -39,3 +40,4 @@ router.get('/:id', async (req, res) => {
 //4.update the jobs details in the db.
 
 //5.delete the job details from db
+module.exports=router
