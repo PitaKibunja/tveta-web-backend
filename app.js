@@ -15,6 +15,7 @@ const feedbackRoute = require('./routes/Feedback')
 const tendersRoute = require('./routes/tenders')
 // const jobsRoute=require('./routes/jobs')
 const jobsRoute=require('./routes/jobs')
+const categoryRoute=require('./routes/Pcategory')
 //use cors to allow access of data from the front-end
 app.use(cors({
     origin:'*'
@@ -29,6 +30,7 @@ app.use('/api_v_1/courses', courseRoute)
 app.use('/api_v_1/feedback', feedbackRoute)
 app.use('/api_v_1/tenders', tendersRoute)
 app.use('/api_v_1/jobs',jobsRoute)
+app.use('/api_v_1/Admin/posts/category',categoryRoute)
 // app.use('/api_v_1/jobs',jobsRoute)
 //connect to db
 mongoose.connect(
