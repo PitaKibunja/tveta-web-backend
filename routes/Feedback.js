@@ -5,13 +5,15 @@ const Feedback = require('../models/Feedback.js')
 
 //setup the mailler
 var transporter = nodemailer.createTransport({
-    host: "smtp.mailtrap.io",
-    port: 2525,
+    host: "mail.tveta.go.ke",
+    port: 25,
     auth: {
-      user: "602544fe38b0e6",
-      pass: "019b98ca8025d9"
+      user: "webmaster@tveta.go.ke",
+      pass: "Teln3t.20!#"
     }
 });
+let sender=null
+let receiver=null
 //get all the feedback saved in the backend.
 router.get('/',async(req, res) => {
     try {
@@ -28,11 +30,14 @@ router.post('/', async (req, res) => {
     const feedbacktype = req.body.feedbacktype
     const name = req.body.name
     const email = req.body.email
+    const email1 = 'webmaster@tveta.go.ke'
     const feedbackMsg = req.body.feedbackMsg
+    const testmail = 'pitakibunja@gmail.com'
+
     
     const feedback = new Feedback({
         feedbacktype: feedbacktype,
-        name:name,
+        name:name, 
         email: email,
         feedbackMsg:feedbackMsg
     })
@@ -40,11 +45,28 @@ router.post('/', async (req, res) => {
     //send the mail to tveta mail
     try {
         const newFeedback = await feedback.save()
+        if (feedbacktype == 'General Enquiry') {
+            const sender = email1
+            const receiver='accounts@tveta.go.ke'
+        } else if (feedbacktype == 'Corruption Reporting') {
+            const sender = email1
+            const receiver='peter.kibunja@tveta.go.ke'
+        } else if (feedbacktype == 'Complaints') {
+            const sender = email1
+            const receiver='pitakibunja@gmail.com'
+        } else if (feedbacktype == 'Customer Feedback') {
+            const sender = email1
+            const receiver='peternkibunja@gmail.com'
+        }
         await transporter.sendMail({
-            from: email,
-            to: 'complaints@tveta.go.ke',
+            from: sender,
+            to: receiver,
             subject: feedbacktype,
-            html:`<p>${feedbackMsg}</p>`
+            html: `<p>
+            ${feedbackMsg}
+            Name:${name}
+            email:${email}
+            </p>`
         })
         res.json(newFeedback)
     } catch (err) {

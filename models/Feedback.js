@@ -17,7 +17,7 @@ const FeedbackSchema = new mongoose.Schema({
     },
     feedbackMsg: {
         type: String,
-        required:false
+        required:true
     },
     date: {
         type: Date,
