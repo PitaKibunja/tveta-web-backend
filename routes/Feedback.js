@@ -12,8 +12,6 @@ var transporter = nodemailer.createTransport({
       pass: "Teln3t.20!#"
     }
 });
-let sender=null
-let receiver=null
 //get all the feedback saved in the backend.
 router.get('/',async(req, res) => {
     try {
@@ -32,7 +30,6 @@ router.post('/', async (req, res) => {
     const email = req.body.email
     const email1 = 'webmaster@tveta.go.ke'
     const feedbackMsg = req.body.feedbackMsg
-    const testmail = 'pitakibunja@gmail.com'
 
     
     const feedback = new Feedback({
@@ -46,29 +43,72 @@ router.post('/', async (req, res) => {
     try {
         const newFeedback = await feedback.save()
         if (feedbacktype == 'General Enquiry') {
-            const sender = email1
-            const receiver='accounts@tveta.go.ke'
+            const sender = email
+            const receiver = 'accounts@tveta.go.ke'
+            await transporter.sendMail({
+                from: sender,
+                to: receiver,
+                subject: feedbacktype,
+                html: `<p>
+                ${feedbackMsg}
+                <br/>
+                Name:${name}
+                <br/>
+                email:${email}
+                </p>`
+            })
+            res.json({
+                message: 'Enquiry submitted successfully',
+                newFeedback
+            })
         } else if (feedbacktype == 'Corruption Reporting') {
             const sender = email1
-            const receiver='peter.kibunja@tveta.go.ke'
+            const receiver = 'peter.kibunja@tveta.go.ke'
+            await transporter.sendMail({
+                from: sender,
+                to: receiver,
+                subject: feedbacktype,
+                html: `<p>
+                ${feedbackMsg}
+                Name:${name}
+                email:${email}
+                </p>`
+            })
+            res.json(newFeedback)
         } else if (feedbacktype == 'Complaints') {
-            const sender = email1
-            const receiver='pitakibunja@gmail.com'
+            const sender = email
+            const receiver = 'pitakibunja@gmail.com'
+            await transporter.sendMail({
+                from: sender,
+                to: receiver,
+                subject: feedbacktype,
+                html: `<p>
+                ${feedbackMsg}
+                Name:${name}
+                email:${email}
+                </p>`
+            })
+            res.json(newFeedback)
         } else if (feedbacktype == 'Customer Feedback') {
-            const sender = email1
-            const receiver='peternkibunja@gmail.com'
+            const sender = email
+            const receiver = 'peternkibunja@gmail.com'
+            await transporter.sendMail({
+                from: sender,
+                to: receiver,
+                subject: feedbacktype,
+                html: `<p>
+                ${feedbackMsg}
+                Name:${name}
+                email:${email}
+                </p>`
+            })
+            res.json(newFeedback)
+        } else {
+            res.json({
+                message:"Error occured"
+            })
         }
-        await transporter.sendMail({
-            from: sender,
-            to: receiver,
-            subject: feedbacktype,
-            html: `<p>
-            ${feedbackMsg}
-            Name:${name}
-            email:${email}
-            </p>`
-        })
-        res.json(newFeedback)
+
     } catch (err) {
         res.json({message:err})
     }    

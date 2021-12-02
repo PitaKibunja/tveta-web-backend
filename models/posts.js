@@ -9,19 +9,9 @@ const PostSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    image: {
+    category: {
         type: String,
-        required:false
-    }
-    ,
-    status: {
-        type: String,
-        default:'public',
-        enum:['public','private'] 
-    },
-    user: { 
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        required:true
     },
     createdAt: {
         type: Date,
