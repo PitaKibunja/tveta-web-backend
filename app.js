@@ -32,7 +32,7 @@ app.use('/api_v_1/feedback', feedbackRoute)
 app.use('/api_v_1/tenders', tendersRoute)
 app.use('/api_v_1/jobs',jobsRoute)
 app.use('/api_v_1/Admin/posts/category', categoryRoute)
-app.use('/api_v_1/post', postsRoute)
+app.use('/api_v_1/Admin/posts/post', postsRoute)
 // app.use('/api_v_1/jobs',jobsRoute)
 //connect to db
 mongoose.connect(

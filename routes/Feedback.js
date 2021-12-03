@@ -57,10 +57,7 @@ router.post('/', async (req, res) => {
                 email:${email}
                 </p>`
             })
-            res.json({
-                message: 'Enquiry submitted successfully',
-                newFeedback
-            })
+            res.json(newFeedback)
         } else if (feedbacktype == 'Corruption Reporting') {
             const sender = email1
             const receiver = 'peter.kibunja@tveta.go.ke'
