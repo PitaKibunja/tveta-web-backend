@@ -2,14 +2,15 @@ const express = require('express')
 const router = express.Router()
 var nodemailer = require('nodemailer');
 const Feedback = require('../models/Feedback.js')
+require('dotenv/config')
 
 //setup the mailler
 var transporter = nodemailer.createTransport({
-    host: "mail.tveta.go.ke",
+    host:  process.env.MAIL_HOST,
     port: 25,
     auth: {
-      user: "webmaster@tveta.go.ke",
-      pass: "Teln3t.20!#"
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_USER_PASSWORD
     }
 });
 //get all the feedback saved in the backend.
@@ -28,7 +29,7 @@ router.post('/', async (req, res) => {
     const feedbacktype = req.body.feedbacktype
     const name = req.body.name
     const email = req.body.email
-    const email1 = 'webmaster@tveta.go.ke'
+    const email1 = process.env.MAIL_USER
     const feedbackMsg = req.body.feedbackMsg
 
     
@@ -44,7 +45,7 @@ router.post('/', async (req, res) => {
         const newFeedback = await feedback.save()
         if (feedbacktype == 'General Enquiry') {
             const sender = email
-            const receiver = 'accounts@tveta.go.ke'
+            const receiver = process.env.GENERAL_ENQUIRY_EMAIL
             await transporter.sendMail({
                 from: sender,
                 to: receiver,
@@ -60,43 +61,44 @@ router.post('/', async (req, res) => {
             res.json(newFeedback)
         } else if (feedbacktype == 'Corruption Reporting') {
             const sender = email1
-            const receiver = 'peter.kibunja@tveta.go.ke'
+            const receiver = process.env.CORRUPTION_REPORT_EMAIL
             await transporter.sendMail({
                 from: sender,
                 to: receiver,
                 subject: feedbacktype,
                 html: `<p>
                 ${feedbackMsg}
-                Name:${name}
+                <br/>
+                Name:${name}<br/>
                 email:${email}
                 </p>`
             })
             res.json(newFeedback)
         } else if (feedbacktype == 'Complaints') {
             const sender = email
-            const receiver = 'pitakibunja@gmail.com'
+            const receiver = process.env.COMPLAINTS_REPORT_EMAIL
             await transporter.sendMail({
                 from: sender,
                 to: receiver,
                 subject: feedbacktype,
                 html: `<p>
-                ${feedbackMsg}
-                Name:${name}
+                ${feedbackMsg}<br/>
+                Name:${name}<br/>
                 email:${email}
                 </p>`
             })
             res.json(newFeedback)
         } else if (feedbacktype == 'Customer Feedback') {
             const sender = email
-            const receiver = 'peternkibunja@gmail.com'
+            const receiver = process.env.CUSTOMER_FEEDBACK_EMAIL
             await transporter.sendMail({
                 from: sender,
                 to: receiver,
                 subject: feedbacktype,
                 html: `<p>
-                ${feedbackMsg}
-                Name:${name}
-                email:${email}
+                ${feedbackMsg}<br/>
+                Name:${name}<br/>
+                email:${email}<br/>
                 </p>`
             })
             res.json(newFeedback)

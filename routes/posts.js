@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 //2.create a new post
 router.post('/', async (req, res) => {
     const title = req.body.title
-    const body = req.body.content
+    const body = req.body.editorData
     const category = req.body.category
 
     const post = new Posts({

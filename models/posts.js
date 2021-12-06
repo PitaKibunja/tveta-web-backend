@@ -11,7 +11,7 @@ const PostSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        required:true
+        required:false
     },
     createdAt: {
         type: Date,
