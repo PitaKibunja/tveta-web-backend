@@ -6,11 +6,20 @@ const Posts = require('../models/posts')
 //1.Get all the posts that are in the database.
 router.get('/', async (req, res) => {
     try {
-        const posts = await Posts.find()
-        res.json({
-            message: 'success',
-            posts
-        })
+        if (req.query.scategory) {
+            const ncate=req.query.scategory
+            const scate = await Posts.find({
+                category:ncate
+            })
+            res.json(scate)
+        } else {
+            const posts = await Posts.find()
+            res.json({
+                message: 'success',
+                posts
+            })
+        }
+       
     } catch (err) {
         res.json({
             message:'error',
@@ -57,4 +66,19 @@ router.get('/:id', async (req, res) => {
         })
     }
 })
+//get the media according to a parameter provided.
+
+// router.get('', async (req,res) => {
+//     try {
+//         const Scategory=req.params.name
+//         // const reqNews=await Posts.find({category:Scategory})
+//         // res.json(reqNews)
+//         console.log(Scategory)
+//     } catch (err) {
+//         res.json({
+//             message:'error',
+//             error: err
+//         })
+//     }
+// })
 module.exports=router
