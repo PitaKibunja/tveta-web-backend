@@ -6,7 +6,8 @@ const PCategory = require('../models/postCategories')
 router.get('/', async (req, res) => {
     try {
         const allcategories = await PCategory.find()
-        res.json(allcategories)
+        let result = allcategories.map(a => a.category)
+        res.json(result)
     } catch (err) {
         res.json({message:err})
     }
