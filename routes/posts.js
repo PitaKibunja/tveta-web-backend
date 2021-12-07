@@ -11,7 +11,15 @@ router.get('/', async (req, res) => {
             const scate = await Posts.find({
                 category:ncate
             })
-            res.json(scate)
+            if (typeof scate !== 'undefined' && scate.length > 0) {
+                res.json(scate)
+            } else {
+                res.json({
+                    message:'error',
+                    error: 'No such category found'
+                })
+            }
+            
         } else {
             const posts = await Posts.find()
             res.json({
