@@ -22,10 +22,7 @@ router.get('/', async (req, res) => {
             
         } else {
             const posts = await Posts.find()
-            res.json(
-                
-                posts
-            )
+            res.json(posts)
         }
        
     } catch (err) {
