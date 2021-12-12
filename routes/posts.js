@@ -60,10 +60,8 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const specificPost = await Posts.findById(req.params.id)
-        res.json({
-            message: 'success',
-            specificPost
-        })
+        res.json(specificPost)
+        
     } catch (err) {
         res.json({
             message: 'failure',
