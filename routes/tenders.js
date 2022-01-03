@@ -46,7 +46,9 @@ router.get('/:id', async (req, res) => {
 //5.delete the tenders details.(also consider auto)
 router.post('/:Tid', async (req,res) => {
     try {
-        const removedTender = await Tenders.remove({ _id: req.params.Tid })
+        const removedTender = await Tenders.findByIdAndDelete({
+            _id: req.params.Tid
+        })
         res.json(removedTender)
     } catch (err) {
         res.json({message:err})
