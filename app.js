@@ -42,4 +42,4 @@ mongoose.connect(
     { useNewUrlParser: true },
     () => console.log('Connected to db'))
 //start the server
-app.listen(3000)
+app.listen(process.env.PORT)
